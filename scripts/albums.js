@@ -30,6 +30,21 @@ var albumMarconi = {
     ]
 };
 
+var albumAlex = {
+    name: 'Ferrari',
+    artist: 'Dimes',
+    label: 'Borghini',
+    year: '2012',
+    albumArtUrl: 'assets/album_covers/07.png',
+    songs: [
+        {name: '458', length:'4:58'},
+        {name: '458', length:'4:58'},
+        {name: '458', length:'4:58'},
+        {name: '458', length:'4:58'},
+        {name: '458', length:'4:58'},
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
        '<tr class="album-view-song-item">'
@@ -42,13 +57,15 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
+// #1
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 var setCurrentAlbum = function(album) {
-    // #1
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 
     // #2
     albumTitle.firstChild.nodeValue = album.name;
@@ -65,6 +82,17 @@ var setCurrentAlbum = function(album) {
     }
 };
 
+
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+
+    var albums = [albumPicasso, albumMarconi, albumAlex];
+    var index = 1;
+    albumImage.addEventListener('click', function(event) {
+        setCurrentAlbum(albums[index]);
+        index ++;
+        if(index == albums.length) {
+            index = 0;
+        }
+    });
 };
